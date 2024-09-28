@@ -14,13 +14,21 @@ class App extends Component {
     ],
   };
 
+  // add a todo Obj to the todo list in the state of the App component
+  addTodo = (todoObj) => {
+    // retrive original todo list
+    const provTodos = this.state.todos;
+    // add the new todoObj to the state
+    this.setState({ todos: [todoObj, ...provTodos] });
+  };
+
   render() {
     const { todos } = this.state;
 
     return (
       <div className="todo-container">
         <div className="todo-wrap">
-          <Header />
+          <Header addTodo={this.addTodo} />
           <List todos={todos} />
           <Footer />
         </div>
