@@ -15,7 +15,7 @@ export default class Item extends Component {
   // callback func for check/uncheck a todo item
   handleCheck = (id) => {
     return (event) => {
-      console.log(event.target.checked);
+      this.props.updateTodo(id, event.target.checked);
     };
   };
 
