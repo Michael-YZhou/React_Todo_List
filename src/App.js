@@ -22,6 +22,22 @@ class App extends Component {
     this.setState({ todos: [todoObj, ...provTodos] });
   };
 
+  // update a todo Object
+  updateTodo = (id, isDone) => {
+    // get old todos
+    const { todos } = this.state;
+    // create new todos with the updated todo item
+    const newTodos = todos.map((todoObj) => {
+      if (todoObj.id === id) {
+        return { ...todoObj, done: isDone };
+      } else {
+        return todoObj;
+      }
+    });
+    // setState to the newTodos
+    this.setState({ todos: newTodos });
+  };
+
   render() {
     const { todos } = this.state;
 
@@ -29,7 +45,7 @@ class App extends Component {
       <div className="todo-container">
         <div className="todo-wrap">
           <Header addTodo={this.addTodo} />
-          <List todos={todos} />
+          <List todos={todos} updateTodo={this.updateTodo} />
           <Footer />
         </div>
       </div>
