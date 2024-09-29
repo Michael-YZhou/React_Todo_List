@@ -2,26 +2,39 @@ import React, { Component } from "react";
 import "./index.css";
 
 export default class Item extends Component {
+  // track mouse enter/exit an todo item
   state = { mouseEnter: false };
 
-  handleMouse = (flag) => {
+  // callback func for mouse enter/exit an item
+  handleMouseEnter = (flag) => {
     return () => {
       this.setState({ mouseEnter: flag });
     };
   };
 
+  // callback func for check/uncheck a todo item
+  handleCheck = (id) => {
+    return (event) => {
+      console.log(event.target.checked);
+    };
+  };
+
   render() {
-    const { name, done } = this.props;
+    const { id, name, done } = this.props;
     const { mouseEnter } = this.state;
 
     return (
       <li
         style={{ backgroundColor: mouseEnter ? "#ddd" : "white" }} // change bg-color onMouseEnter
-        onMouseEnter={this.handleMouse(true)}
-        onMouseLeave={this.handleMouse(false)}
+        onMouseEnter={this.handleMouseEnter(true)}
+        onMouseLeave={this.handleMouseEnter(false)}
       >
         <label>
-          <input type="checkbox" defaultChecked={done} />
+          <input
+            type="checkbox"
+            defaultChecked={done}
+            onChange={this.handleCheck(id)}
+          />
           <span>{name}</span>
         </label>
         <button
