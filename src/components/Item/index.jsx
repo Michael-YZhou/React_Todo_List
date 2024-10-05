@@ -19,6 +19,13 @@ export default class Item extends Component {
     };
   };
 
+  // callback function for delete a todo item
+  handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this item ?")) {
+      this.props.deleteTodo(id);
+    }
+  };
+
   render() {
     const { id, name, done } = this.props;
     const { mouseEnter } = this.state;
@@ -39,6 +46,7 @@ export default class Item extends Component {
         </label>
         <button
           className="btn btn-danger"
+          onClick={() => this.handleDelete(id)}
           style={{ display: mouseEnter ? "block" : "none" }} // display the Delete btn onMouseEnter
         >
           Delete
