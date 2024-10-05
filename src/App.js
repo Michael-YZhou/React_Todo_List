@@ -51,6 +51,28 @@ class App extends Component {
     this.setState({ todos: newTodos });
   };
 
+  checkAllTodo = (done) => {
+    // get the todos
+    const { todos } = this.state;
+    // change done status of all todos to true
+    const newTodos = todos.map((todoObj) => {
+      return { ...todoObj, done };
+    });
+    // setState to the newTodos
+    this.setState({ todos: newTodos });
+  };
+
+  clearAllDone = () => {
+    // get the todos
+    const { todos } = this.state;
+    // filter out the todos with done status as false
+    const newTodos = todos.filter((todoObj) => {
+      return !todoObj.done;
+    });
+    // setState to the newTodos
+    this.setState({ todos: newTodos });
+  };
+
   render() {
     const { todos } = this.state;
 
@@ -63,7 +85,11 @@ class App extends Component {
             updateTodo={this.updateTodo}
             deleteTodo={this.deleteTodo}
           />
-          <Footer />
+          <Footer
+            todos={todos}
+            checkAllTodo={this.checkAllTodo}
+            clearAllDone={this.clearAllDone}
+          />
         </div>
       </div>
     );
