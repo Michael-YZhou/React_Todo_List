@@ -38,6 +38,19 @@ class App extends Component {
     this.setState({ todos: newTodos });
   };
 
+  deleteTodo = (id) => {
+    console.log(id);
+    console.log(this);
+    // get the old todos
+    const { todos } = this.state;
+    // filter out the todoObj with the given id
+    const newTodos = todos.filter((todoObj) => {
+      return todoObj.id !== id;
+    });
+    // setState to the newTodos
+    this.setState({ todos: newTodos });
+  };
+
   render() {
     const { todos } = this.state;
 
@@ -45,7 +58,11 @@ class App extends Component {
       <div className="todo-container">
         <div className="todo-wrap">
           <Header addTodo={this.addTodo} />
-          <List todos={todos} updateTodo={this.updateTodo} />
+          <List
+            todos={todos}
+            updateTodo={this.updateTodo}
+            deleteTodo={this.deleteTodo}
+          />
           <Footer />
         </div>
       </div>
